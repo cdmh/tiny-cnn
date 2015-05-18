@@ -27,6 +27,7 @@
 #pragma once
 #include "util.h"
 #include "product.h"
+#include <array>
 
 namespace tiny_cnn {
 
@@ -140,14 +141,14 @@ protected:
 
     layer_base<N>* next_;
     layer_base<N>* prev_;
-    vec_t output_[CNN_TASK_SIZE];     // last output of current layer, set by fprop
-    vec_t prev_delta_[CNN_TASK_SIZE]; // last delta of previous layer, set by bprop
-    vec_t W_;          // weight vector
-    vec_t b_;          // bias vector
-    vec_t dW_[CNN_TASK_SIZE];
-    vec_t db_[CNN_TASK_SIZE];
+    std::array<vec_t, CNN_TASK_SIZE> output_;       // last output of current layer, set by fprop
+    std::array<vec_t, CNN_TASK_SIZE> prev_delta_;   // last delta of previous layer, set by bprop
+    std::array<vec_t, CNN_TASK_SIZE> dW_;
+    std::array<vec_t, CNN_TASK_SIZE> db_;
 
-    vec_t Whessian_; // diagonal terms of hessian matrix
+    vec_t W_;           // weight vector
+    vec_t b_;           // bias vector
+    vec_t Whessian_;    // diagonal terms of hessian matrix
     vec_t bhessian_;
     vec_t prev_delta2_; // d^2E/da^2
 

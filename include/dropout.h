@@ -28,6 +28,7 @@
 #include "layer.h"
 #include "product.h"
 #include "util.h"
+#include <array>
 
 namespace tiny_cnn {
 
@@ -123,8 +124,8 @@ namespace tiny_cnn {
     private:
         int out_dim_;
         std::vector<uint8_t> mask_;
-        vec_t masked_out_[CNN_TASK_SIZE];
-        vec_t masked_delta_[CNN_TASK_SIZE];
+        std::array<vec_t, CNN_TASK_SIZE> masked_out_;
+        std::array<vec_t, CNN_TASK_SIZE> masked_delta_;
         context ctx_;
         dropout_mode mode_;
         double dropout_rate_;

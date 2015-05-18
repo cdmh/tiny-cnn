@@ -26,7 +26,7 @@
 */
 #include "picotest.h"
 #include "tiny_cnn.h"
-#include <boost/filesystem.hpp>
+//#include <boost/filesystem.hpp>
 
 using namespace tiny_cnn;
 using namespace tiny_cnn::activation;
@@ -465,6 +465,8 @@ TEST(multi_layer4, gradient_check) { // sigmoid - cross-entropy
     EXPECT_TRUE(nn.gradient_check(&a, &t, 1, 1e-4, GRAD_CHECK_RANDOM));
 }
 
+#ifdef BOOST_FILESYSTEM_FILESYSTEM_HPP
+
 template <typename N>
 void serialization_test(const layer_base<N>& src, layer_base<N>& dst)
 {
@@ -521,6 +523,7 @@ TEST(read_write, convolutional)
 
     serialization_test(l1, l2);
 }
+#endif  // BOOST_FILESYSTEM_FILESYSTEM_HPP
 
 int main(void) {
     RUN_ALL_TESTS();
